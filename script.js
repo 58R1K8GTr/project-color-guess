@@ -1,9 +1,15 @@
+// criando elementos.
+const pAnswerStrong = document.createElement('strong');
+
 // obtendo os elementos.
 const headerH1 = document.querySelector('#title');
 const pRGBColor = document.querySelector('#rgb-color');
 const ballsDiv = document.querySelector('#balls-div');
+const pAnswer = document.querySelector('#answer');
 
 // configurando os elementos.
+pAnswerStrong.innerText = 'Escolha uma cor';
+pAnswer.appendChild(pAnswerStrong);
 
 // código.
 const colors = ['green', 'black', 'purple', 'red', 'blue', 'orange', 'gray', 'yellow'];
@@ -28,4 +34,24 @@ for (let indexDiv = 0; indexDiv < 6; indexDiv += 1) {
   div.classList.add('ball');
   div.style.backgroundColor = 'rgb' + randomColor();
   ballsDiv.appendChild(div);
+}
+
+function choiceTheRightDiv() {
+  const div = ballsDiv.children[randomNumber(5)];
+  div.style.backgroundColor = 'rgb' + randomColorString;
+}
+
+choiceTheRightDiv();
+
+function divChoiced(event) {
+  if (event.target.style.backgroundColor == 'rgb' + randomColorString) {
+    pAnswerStrong.innerText = 'Acertou!';
+  } else {
+    pAnswerStrong.innerText = 'Errou! Tente novamente!';
+  }
+}
+
+for (let indexDiv = 0; indexDiv < ballsDiv.children.length; indexDiv += 1) {
+  const div = ballsDiv.children[indexDiv];
+  div.addEventListener('click', divChoiced);
 }
