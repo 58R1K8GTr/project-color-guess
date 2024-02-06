@@ -1,6 +1,7 @@
 // obtendo os elementos.
 const headerH1 = document.querySelector('#title');
 const pRGBColor = document.querySelector('#rgb-color');
+const ballsDiv = document.querySelector('#balls-div');
 
 // configurando os elementos.
 
@@ -19,4 +20,11 @@ function randomColor() {
   return `(${randomNumber(255)}, ${randomNumber(255)}, ${randomNumber(255)})`;
 }
 
-pRGBColor.innerText = randomColor();
+randomColorString = randomColor();
+pRGBColor.innerText = randomColorString;
+
+for (let indexDiv = 0; indexDiv < 6; indexDiv += 1) {
+  const div = document.createElement('div');
+  div.classList.add('ball');
+  ballsDiv.appendChild(div);
+}
