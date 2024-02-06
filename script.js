@@ -6,10 +6,12 @@ const headerH1 = document.querySelector('#title');
 const pRGBColor = document.querySelector('#rgb-color');
 const ballsDiv = document.querySelector('#balls-div');
 const pAnswer = document.querySelector('#answer');
+const buttonResetGame = document.querySelector('#reset-game');
 
 // configurando os elementos.
 pAnswerStrong.innerText = 'Escolha uma cor';
 pAnswer.appendChild(pAnswerStrong);
+buttonResetGame.innerText = 'resetar o jogo';
 
 // código.
 const colors = ['green', 'black', 'purple', 'red', 'blue', 'orange', 'gray', 'yellow'];
@@ -37,14 +39,19 @@ for (let indexDiv = 0; indexDiv < 6; indexDiv += 1) {
 }
 
 function choiceTheRightDiv() {
+  const oldDiv = document.querySelector('.rightDiv');
+  if (oldDiv) {
+    oldDiv.classList.remove('rightDiv');
+  }
   const div = ballsDiv.children[randomNumber(5)];
   div.style.backgroundColor = 'rgb' + randomColorString;
+  div.classList.add('rightDiv')
 }
 
 choiceTheRightDiv();
 
 function divChoiced(event) {
-  if (event.target.style.backgroundColor == 'rgb' + randomColorString) {
+  if (event.target.classList.contains('rightDiv')) {
     pAnswerStrong.innerText = 'Acertou!';
   } else {
     pAnswerStrong.innerText = 'Errou! Tente novamente!';
@@ -55,3 +62,20 @@ for (let indexDiv = 0; indexDiv < ballsDiv.children.length; indexDiv += 1) {
   const div = ballsDiv.children[indexDiv];
   div.addEventListener('click', divChoiced);
 }
+
+function changeColorDivs() {
+  for (let indexDiv = 0; indexDiv < ballsDiv.children.length; indexDiv += 1) {
+    const div = ballsDiv.children[indexDiv];
+    div.style.backgroundColor = 'rgb' + randomColor();
+  }
+}
+
+function resetGame() {
+  randomColorString = randomColor();
+  pRGBColor.innerText = randomColorString;
+  changeColorDivs();
+  choiceTheRightDiv();
+  pAnswerStrong.innerText = 'Escolha uma cor';
+}
+
+buttonResetGame.addEventListener('click', resetGame);
