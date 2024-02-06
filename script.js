@@ -26,5 +26,6 @@ pRGBColor.innerText = randomColorString;
 for (let indexDiv = 0; indexDiv < 6; indexDiv += 1) {
   const div = document.createElement('div');
   div.classList.add('ball');
+  div.style.backgroundColor = 'rgb' + randomColor();
   ballsDiv.appendChild(div);
 }
