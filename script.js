@@ -7,11 +7,13 @@ const pRGBColor = document.querySelector('#rgb-color');
 const ballsDiv = document.querySelector('#balls-div');
 const pAnswer = document.querySelector('#answer');
 const buttonResetGame = document.querySelector('#reset-game');
+const pScore = document.querySelector('#score');
 
 // configurando os elementos.
 pAnswerStrong.innerText = 'Escolha uma cor';
 pAnswer.appendChild(pAnswerStrong);
 buttonResetGame.innerText = 'resetar o jogo';
+pScore.innerText = 'Placar: 0';
 
 // código.
 const colors = ['green', 'black', 'purple', 'red', 'blue', 'orange', 'gray', 'yellow'];
@@ -50,12 +52,17 @@ function choiceTheRightDiv() {
 
 choiceTheRightDiv();
 
+let score = 0;
+
 function divChoiced(event) {
   if (event.target.classList.contains('rightDiv')) {
     pAnswerStrong.innerText = 'Acertou!';
+    score += 3;
   } else {
     pAnswerStrong.innerText = 'Errou! Tente novamente!';
+    score -= 1;
   }
+  pScore.innerText = `Placar: ${score}`
 }
 
 for (let indexDiv = 0; indexDiv < ballsDiv.children.length; indexDiv += 1) {
